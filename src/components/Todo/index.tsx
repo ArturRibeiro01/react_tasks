@@ -1,21 +1,24 @@
+
 import { PlusCircle } from 'phosphor-react';
 import { StatusTask, TaskListContainerEmpty, TaskListEmptyDescription, TasksContainer, TasksStats, ToDoContainer, ToDoNewTaskContainer } from './styles';
 
 import pranchetaImg from '../../assets/clipboard.svg'
 import Task from '../Task';
+import { mockTasks } from '../../Mocks/tasks';
+
+import { TasksContext } from '../../contexts/TasksContext';
+import { useContextSelector } from 'use-context-selector';
+
 
 
 export default function Todo() {
-  const tasks = [
-  {
-    id: 1,
-  content: 'Lorem ipsum dolor sit amet consecteturffdsfdfffdsfdsfdsfsdfdsfsdfdsf'
-  },
-  {
-    id: 2,
-    content: 'Lorem ipsum dolor sit '
-  }
-]
+
+  const tasks = useContextSelector(TasksContext, (context) => {
+    return context.tasks
+  })
+
+  console.log('tasks', tasks)
+
 
   return (
     <ToDoContainer>
@@ -23,7 +26,7 @@ export default function Todo() {
         <input type="text" placeholder='Adicione uma nova tarefa'/>
         <button type="submit">
           Criar
-          <PlusCircle size={18} />
+          <PlusCircle size={18}/>
         </button>
       </ToDoNewTaskContainer>
 
@@ -32,27 +35,30 @@ export default function Todo() {
         <TasksStats>
           <article>
             <StatusTask>Tarefas Criadas</StatusTask>
-            <span>0</span>
+            <span>{tasks.length}</span>
           </article>
           <article>
             <StatusTask variant="complete">Concluídas</StatusTask>
-            <span>0</span>
+            <span>
+
+            </span>
           </article>
         </TasksStats>
 
 
-        {tasks.length > 0 ?
+        {tasks.length != 0 ? (
 
-            //@ts-ignore
-          tasks.map( (task) =>
+          tasks.map((task) =>
             <Task
               key={task.id}
               content={task.content}
-              completed={false}
+              completed={task.completed}
             />
-
           )
+          )
+
           :
+
           <TaskListContainerEmpty>
             <img src= {pranchetaImg}  alt="icone_cadastro_vazio"/>
             <TaskListEmptyDescription>

@@ -1,0 +1,25 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "content": "Essa é uma aplicação React + TypeScript utilizando Vite",
+      "completed": false
+    },
+    {
+      "id": 2,
+      "content": "Para estilos, prototipação e design foram usados styled-components , phoshor-react , radix-UI",
+      "completed": true
+    },
+    {
+      "id": 3,
+      "content": "Manipulação dos dados das tasks foram usadas json-server + axios",
+      "completed": false
+    },
+    {
+      "id": 4,
+      "content": "Manipulação dos dados das tasks foram usadas json-server + axios",
+      "completed": false
+    }
+  ]
+
+}

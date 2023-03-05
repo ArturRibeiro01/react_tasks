@@ -67,6 +67,7 @@ export const TasksContainer = styled.section`
 export const TasksStats = styled.div`
   display: flex;
   justify-content: space-between;
+  margin-bottom: 1.5rem;
 
   article {
     display: flex;

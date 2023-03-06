@@ -17,6 +17,8 @@ export default function Todo() {
     return context.tasks
   })
 
+  const tasksCompleted =
+
   console.log('tasks', tasks)
 
 
@@ -38,7 +40,7 @@ export default function Todo() {
             <span>{tasks.length}</span>
           </article>
           <article>
-            <StatusTask variant="complete">Concluídas</StatusTask>
+            <StatusTask variant="completed">Concluídas</StatusTask>
             <span>
 
             </span>

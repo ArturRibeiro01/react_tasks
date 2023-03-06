@@ -25,6 +25,7 @@ export default function Task({content, completed }: TaskContentProps){
           <p>
             {content}
           </p>
+
           <Trash size={20} className="trash-icon" />
         </div>
       </TaskItem>

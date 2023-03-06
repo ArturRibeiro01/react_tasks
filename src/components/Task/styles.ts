@@ -25,6 +25,7 @@ export const TaskItem = styled.li`
     p {
       flex: 1;
       white-space: wrap;
+      padding-left: 12px;
 
       font-size: 14px;
       color: ${(props) => props.theme['gray-100']};

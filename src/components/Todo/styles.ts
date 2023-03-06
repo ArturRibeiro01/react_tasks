@@ -2,7 +2,6 @@ import styled, { css } from 'styled-components'
 
 
 export const ToDoContainer = styled.section`
-  /* background-color: ${(props) => props.theme['gray-200']}; */
   width: 100%;
   max-width: 736px;
   margin: 0 auto;
@@ -86,7 +85,7 @@ export const TasksStats = styled.div`
 `
 
 interface StatusTasksProps {
-  variant?: 'complete'
+  variant?: 'completed'
 }
 
 export const StatusTask = styled.p<StatusTasksProps>`
@@ -97,12 +96,15 @@ export const StatusTask = styled.p<StatusTasksProps>`
 
 
   ${(props) =>
-    props.variant === 'complete' &&
+    props.variant === 'completed' &&
     css`
       color: ${(props) => props.theme['purple']};
     `}
 
 `
+
+
+// Sem Tasks
 
 export const TaskListContainerEmpty = styled.div`
   margin-top: 1.5rem;

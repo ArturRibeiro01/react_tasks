@@ -9,7 +9,9 @@ interface TaskContentProps {
 }
 
 
-export default function Task({content, completed }: TaskContentProps){
+export default function Task({content }: TaskContentProps){
+
+
 
   return (
     <TaskContainer>
@@ -26,7 +28,13 @@ export default function Task({content, completed }: TaskContentProps){
             {content}
           </p>
 
-          <Trash size={20} className="trash-icon" />
+          <button
+            className="trash-icon"
+            // onClick={}
+          >
+              <Trash size={20}  />
+          </button>
+
         </div>
       </TaskItem>
     </TaskContainer>

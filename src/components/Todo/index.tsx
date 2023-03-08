@@ -18,6 +18,7 @@ const newTaskFormSchema = z.object({
   content: z.string({
     required_error: "Preencha o campo com a tarefa",
   }),
+  taskSelected: z.number()
 })
 
 type NewTaskFormInput = z.infer<typeof newTaskFormSchema>
@@ -62,7 +63,7 @@ export default function Todo() {
     reset()
   }
 
-  // console.log('tasks', tasks)
+  console.log('tasks', tasks)
 
   return (
     <ToDoContainer>
@@ -98,6 +99,7 @@ export default function Todo() {
 
 
         {tasks.length != 0 ? (
+
             tasks.map((task) =>
               <Task
                 key={task.id}

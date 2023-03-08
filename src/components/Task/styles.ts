@@ -33,8 +33,12 @@ export const TaskItem = styled.li`
 
     .trash-icon {
       color: ${(props) => props.theme['gray-300']};
+      background-color: transparent;
+      border: none;
       border-radius: 5px;
       cursor: pointer;
+      padding: 0 4px;
+      align-items: center;
 
       &:hover {
         color: ${(props) => props.theme['danger']};
@@ -56,6 +60,7 @@ export const CheckBoxRoot = styled(Checkbox.Root)`
   display: flex;
   align-items: center;
   justify-content: center;
+  cursor: pointer;
 
   &:hover {
     background-color: ${(props) => props.theme['blue-dark']};

@@ -32,6 +32,10 @@ export function TasksProvider({ children }: TasksProviderProps) {
 
   const [tasks, setTasks] = useState<Tasks[]>([])
 
+  useEffect(() => {
+    fetchTasks()
+  }, [])
+
 
   const fetchTasks = useCallback(async () => {
     const response = await api.get('/tasks', {
@@ -57,9 +61,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
 
 
 
-  useEffect(() => {
-    fetchTasks()
-  }, [])
+
 
 
   return (

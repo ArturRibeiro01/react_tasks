@@ -1,6 +1,6 @@
 
 import { PlusCircle } from 'phosphor-react';
-import { StatusTask, TaskListContainerEmpty, TaskListEmptyDescription, TasksContainer, TasksStats, ToDoContainer, ToDoNewTaskContainer } from './styles';
+import { StatusTask, TaskListContainerEmpty, TaskListEmptyDescription, TasksContainer, TasksStats, ToDoContainer, ToDoNewTaskForm } from './styles';
 
 import pranchetaImg from '../../assets/clipboard.svg'
 import Task from '../Task';
@@ -8,6 +8,18 @@ import { mockTasks } from '../../Mocks/tasks';
 
 import { TasksContext } from '../../contexts/TasksContext';
 import { useContextSelector } from 'use-context-selector';
+import { useForm } from 'react-hook-form';
+import { z } from 'zod';
+
+
+const newTaskFormSchema = z.object({
+  completed: z.boolean(),
+  content: z.string({
+    required_error: "Preencha o campo com a tarefa",
+  }),
+})
+
+type NewTaskFormInput = z.infer<typeof newTaskFormSchema>
 
 
 
@@ -15,22 +27,32 @@ export default function Todo() {
 
   const tasks = useContextSelector(TasksContext, (context) => {
     return context.tasks
+  });
+
+  const createTask = useContextSelector(
+    TasksContext,
+    (context) => {
+      return context.createNewTask
+    },
+  )
+
+  const {handleSubmit,register} = useForm<NewTaskFormInput>({
+
   })
 
-  const tasksCompleted =
 
   console.log('tasks', tasks)
 
 
   return (
     <ToDoContainer>
-      <ToDoNewTaskContainer>
+      <ToDoNewTaskForm onSubmit={handleSubmit()}>
         <input type="text" placeholder='Adicione uma nova tarefa'/>
         <button type="submit">
           Criar
           <PlusCircle size={18}/>
         </button>
-      </ToDoNewTaskContainer>
+      </ToDoNewTaskForm>
 
 
       <TasksContainer>

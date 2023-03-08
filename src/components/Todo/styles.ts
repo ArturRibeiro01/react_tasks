@@ -8,7 +8,7 @@ export const ToDoContainer = styled.section`
   padding: 0 1.5rem;
 
 `
-export const ToDoNewTaskContainer = styled.form`
+export const ToDoNewTaskForm = styled.form`
   display: flex;
   gap: 1rem;
   margin-top: -2rem;

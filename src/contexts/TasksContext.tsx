@@ -14,8 +14,12 @@ interface Tasks {
 interface TasksContextType {
   tasks: Tasks[]
   fetchTasks: () => void
-  // fetchTasks: (query?: string) => Promise<void>
+  createNewTask : (data: CreateTaskInput) => Promise<void>
+}
 
+interface CreateTaskInput {
+  content: string,
+  completed: boolean
 }
 
 interface TasksProviderProps {
@@ -31,12 +35,26 @@ export function TasksProvider({ children }: TasksProviderProps) {
 
   const fetchTasks = useCallback(async () => {
     const response = await api.get('/tasks', {
-      params: {
-
-      },
+      params: {},
     })
     setTasks(response.data)
   }, [])
+
+  const createNewTask = useCallback(
+    async (data: CreateTaskInput) => {
+      const { content, completed } = data
+
+      const response = await api.post('tasks', {
+        content,
+        completed,
+        createdAt: new Date(),
+      })
+
+      setTasks((state) => [response.data, ...state])
+    },
+    [],
+  )
+
 
 
   useEffect(() => {
@@ -46,7 +64,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
 
   return (
     <TasksContext.Provider
-      value={{ tasks, fetchTasks }}
+      value={{ tasks, fetchTasks, createNewTask}}
     >
       {children}
     </TasksContext.Provider>

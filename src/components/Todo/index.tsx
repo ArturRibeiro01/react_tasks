@@ -10,6 +10,7 @@ import { TasksContext } from '../../contexts/TasksContext';
 import { useContextSelector } from 'use-context-selector';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
+import { zodResolver } from '@hookform/resolvers/zod'
 
 
 const newTaskFormSchema = z.object({
@@ -36,22 +37,48 @@ export default function Todo() {
     },
   )
 
-  const {handleSubmit,register} = useForm<NewTaskFormInput>({
+  const {
+    handleSubmit,
+    register,
+    formState: { isSubmitting },
+    reset
+  } = useForm<NewTaskFormInput>({
+    resolver: zodResolver(newTaskFormSchema),
+    defaultValues: {
+      completed: false
+    },
 
   })
 
 
-  console.log('tasks', tasks)
+  async function handleCreateNewTask(data: NewTaskFormInput) {
+    const { content, completed } = data
 
+    await createTask({
+      content,
+      completed,
+    })
+
+    reset()
+  }
+
+  // console.log('tasks', tasks)
 
   return (
     <ToDoContainer>
-      <ToDoNewTaskForm onSubmit={handleSubmit()}>
-        <input type="text" placeholder='Adicione uma nova tarefa'/>
-        <button type="submit">
+      <ToDoNewTaskForm onSubmit={handleSubmit(handleCreateNewTask)}>
+
+        <input
+          type="text"
+          placeholder='Adicione uma nova tarefa'
+          {...register('content',{required: true })}
+        />
+
+        <button type="submit" disabled={isSubmitting}>
           Criar
           <PlusCircle size={18}/>
         </button>
+
       </ToDoNewTaskForm>
 
 
@@ -71,33 +98,28 @@ export default function Todo() {
 
 
         {tasks.length != 0 ? (
-
-          tasks.map((task) =>
-            <Task
-              key={task.id}
-              content={task.content}
-              completed={task.completed}
-            />
+            tasks.map((task) =>
+              <Task
+                key={task.id}
+                content={task.content}
+                completed={task.completed}
+              />
+            )
           )
-          )
-
-          :
-
+        :
           <TaskListContainerEmpty>
-            <img src= {pranchetaImg}  alt="icone_cadastro_vazio"/>
-            <TaskListEmptyDescription>
-              Você ainda não tem tarefas cadastradas
-            </TaskListEmptyDescription>
+              <img src= {pranchetaImg}  alt="icone_cadastro_vazio"/>
+              <TaskListEmptyDescription>
+                Você ainda não tem tarefas cadastradas
+              </TaskListEmptyDescription>
 
-            <TaskListEmptyDescription variant='subtitle' >
-              Crie tarefas e organize seus itens a fazer
-            </TaskListEmptyDescription>
+              <TaskListEmptyDescription variant='subtitle' >
+                Crie tarefas e organize seus itens a fazer
+              </TaskListEmptyDescription>
           </TaskListContainerEmpty>
         }
+
       </TasksContainer>
-
-
-      <div></div>
 
 
     </ToDoContainer>

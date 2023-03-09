@@ -4,7 +4,6 @@ import { StatusTask, TaskListContainerEmpty, TaskListEmptyDescription, TasksCont
 
 import pranchetaImg from '../../assets/clipboard.svg'
 import Task from '../Task';
-import { mockTasks } from '../../Mocks/tasks';
 
 import { TasksContext } from '../../contexts/TasksContext';
 import { useContextSelector } from 'use-context-selector';
@@ -18,7 +17,6 @@ const newTaskFormSchema = z.object({
   content: z.string({
     required_error: "Preencha o campo com a tarefa",
   }),
-  taskSelected: z.number()
 })
 
 type NewTaskFormInput = z.infer<typeof newTaskFormSchema>
@@ -63,7 +61,6 @@ export default function Todo() {
     reset()
   }
 
-  console.log('tasks', tasks)
 
   return (
     <ToDoContainer>

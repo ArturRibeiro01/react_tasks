@@ -1,8 +1,8 @@
 
 import { Check, PlusCircle, Trash } from 'phosphor-react';
-import { StatusTask, TaskListContainerEmpty, TaskListEmptyDescription, TasksContainer, TasksStats, ToDoContainer, ToDoNewTaskForm } from './styles';
+import { StatusTask, TasksContainer, TasksStats, ToDoContainer, ToDoNewTaskForm } from './styles';
 
-import pranchetaImg from '../../assets/clipboard.svg'
+
 
 import { TasksContext } from '../../contexts/TasksContext';
 import { useContextSelector } from 'use-context-selector';
@@ -12,6 +12,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckBoxIndicator, CheckBoxRoot, DateCreatedContainer, TaskItem, TaskList } from './task';
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
+import TaskEmpty from '../TaskEmpty';
 
 
 const newTaskFormSchema = z.object({
@@ -23,7 +24,6 @@ const newTaskFormSchema = z.object({
 
 
 type NewTaskFormInput = z.infer<typeof newTaskFormSchema>
-
 
 export default function Todo() {
 
@@ -42,6 +42,13 @@ export default function Todo() {
     TasksContext,
     (context) => {
       return context.deleteTask
+    },
+  )
+
+  const updateStatusTask = useContextSelector(
+    TasksContext,
+    (context) => {
+      return context.updateItem
     },
   )
 
@@ -76,13 +83,24 @@ export default function Todo() {
     reset()
   }
 
-  async function handleDeleteTask ( data: any){
-    const  id  = data
-    console.log('item selecionado', id)
-    await deleteTask(id)
+  async function handleUpdateTask(data: any) {
+
+    const { id } = data
+    console.log
+    // console.log('completed', completed)
+
+    // await updateStatusTask({
+    //   completed,
+    //   id
+    // })
+
   }
 
 
+  async function handleDeleteTask ( data: any){
+    const  id  = data
+    await deleteTask(id)
+  }
 
 
   return (
@@ -123,8 +141,11 @@ export default function Todo() {
               <TaskList key={task.id}>
                 <TaskItem >
                   <div>
-                    <CheckBoxRoot className="CheckboxRoot"  id="c1">
-                      <CheckBoxIndicator>
+                    <CheckBoxRoot
+                      className="CheckboxRoot"
+                      id="c1"
+                    >
+                      <CheckBoxIndicator  >
                         <Check size={14} weight="bold" />
                       </CheckBoxIndicator>
                     </CheckBoxRoot>
@@ -154,16 +175,7 @@ export default function Todo() {
 
           )
         :
-          <TaskListContainerEmpty>
-              <img src= {pranchetaImg}  alt="icone_cadastro_vazio"/>
-              <TaskListEmptyDescription>
-                Você ainda não tem tarefas cadastradas
-              </TaskListEmptyDescription>
-
-              <TaskListEmptyDescription variant='subtitle' >
-                Crie tarefas e organize seus itens a fazer
-              </TaskListEmptyDescription>
-          </TaskListContainerEmpty>
+        <TaskEmpty/>
         }
 
       </TasksContainer>

@@ -14,12 +14,19 @@ interface TasksContextType {
   tasks: Tasks[]
   fetchTasks: () => void
   createNewTask : (data: CreateTaskInput) => Promise<void>
+  updateItem: (data: UpdateTask) => Promise<void>
   deleteTask : (data: DeleteTask) => Promise<void>
   calcTaskFinished : () => ReactNode
+
 }
 
 interface CreateTaskInput {
   content: string,
+  completed: boolean
+}
+
+interface UpdateTask {
+  id: string,
   completed: boolean
 }
 interface DeleteTask {
@@ -41,7 +48,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
     fetchTasks()
   }, [])
 
-
+  //Faz um fetch de todas as minhas tasks
   const fetchTasks = useCallback(async () => {
     const response = await api.get('/tasks', {
       params: {},
@@ -50,14 +57,8 @@ export function TasksProvider({ children }: TasksProviderProps) {
   }, [])
 
 
-  const calcTaskFinished = useCallback(() => {
-    let selectCompletedTasks = tasks.filter(task => (task.completed == true));
-    let totalcompleted = selectCompletedTasks.length
 
-    return totalcompleted
-  }, [tasks])
-
-
+  //Cria uma nova task
   const createNewTask = useCallback(
     async (data: CreateTaskInput) => {
       const { content, completed } = data
@@ -73,6 +74,25 @@ export function TasksProvider({ children }: TasksProviderProps) {
     [],
   )
 
+  //Atualiza o status de um item
+
+  const updateItem = useCallback(
+      async (data: UpdateTask) => {
+        const { id, completed } = data
+
+        const response = await api.put(`tasks/${id}`, {
+          // id,
+          completed,
+        })
+
+        console.log('updatetask', data)
+
+        setTasks((state) => [response.data, ...state])
+      },
+      [],
+  )
+
+  //Deleta uma task
   const deleteTask = useCallback(
     async (data: DeleteTask) => {
       const  id  = data
@@ -83,11 +103,25 @@ export function TasksProvider({ children }: TasksProviderProps) {
     [],
   )
 
+  //filtra todas as tasks existentes e separa as concluidas
+  const calcTaskFinished = useCallback(() => {
+    let selectCompletedTasks = tasks.filter(task => (task.completed == true));
+    let totalcompleted = selectCompletedTasks.length
+
+    return totalcompleted
+  }, [tasks])
 
 
   return (
     <TasksContext.Provider
-      value={{ tasks, fetchTasks, createNewTask, deleteTask, calcTaskFinished}}
+      value={{
+        tasks,
+        fetchTasks,
+        createNewTask,
+        deleteTask,
+        calcTaskFinished,
+        updateItem
+      }}
     >
       {children}
     </TasksContext.Provider>

@@ -8,7 +8,6 @@ interface Tasks {
   content: string;
   completed: boolean;
   createdAt: string
-
 }
 
 interface TasksContextType {
@@ -54,8 +53,6 @@ export function TasksProvider({ children }: TasksProviderProps) {
   const calcTaskFinished = useCallback(() => {
     let selectCompletedTasks = tasks.filter(task => (task.completed == true));
     let totalcompleted = selectCompletedTasks.length
-
-    console.log('total completado',totalcompleted)
 
     return totalcompleted
   }, [tasks])

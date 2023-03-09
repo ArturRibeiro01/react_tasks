@@ -93,6 +93,7 @@ export default function Todo() {
           type="text"
           placeholder='Adicione uma nova tarefa'
           {...register('content',{required: true })}
+          required
         />
 
         <button type="submit" disabled={isSubmitting}>

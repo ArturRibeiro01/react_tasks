@@ -9,7 +9,9 @@ import { useContextSelector } from 'use-context-selector';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
-import { CheckBoxIndicator, CheckBoxRoot, TaskItem, TaskList } from './task';
+import { CheckBoxIndicator, CheckBoxRoot, DateCreatedContainer, TaskItem, TaskList } from './task';
+import { format, parseISO } from 'date-fns';
+import pt from 'date-fns/locale/pt';
 
 
 const newTaskFormSchema = z.object({
@@ -21,8 +23,6 @@ const newTaskFormSchema = z.object({
 
 
 type NewTaskFormInput = z.infer<typeof newTaskFormSchema>
-
-
 
 
 export default function Todo() {
@@ -66,17 +66,13 @@ export default function Todo() {
       content,
       completed,
     })
-
     reset()
   }
 
   async function handleDeleteTask ( data: any){
     const  id  = data
     console.log('item selecionado', id)
-
     await deleteTask(id)
-
-
   }
 
 
@@ -115,37 +111,40 @@ export default function Todo() {
 
         {tasks.length != 0 ? (
 
-          tasks.map((task) =>
-            <TaskList key={task.id}>
-              <TaskItem >
-                <div>
-                  <CheckBoxRoot className="CheckboxRoot"  id="c1">
-                    <CheckBoxIndicator className="CheckboxIndicator">
-                      <Check size={14} weight="bold" />
-                    </CheckBoxIndicator>
-                  </CheckBoxRoot>
+            tasks.map((task) =>
+              <TaskList key={task.id}>
+                <TaskItem >
+                  <div>
+                    <CheckBoxRoot className="CheckboxRoot"  id="c1">
+                      <CheckBoxIndicator className="CheckboxIndicator">
+                        <Check size={14} weight="bold" />
+                      </CheckBoxIndicator>
+                    </CheckBoxRoot>
 
-                  <p>{task.content}</p>
+                    <p>{task.content}</p>
 
-                  <button
-                    className="trash-icon"
-                    onClick={ () => handleDeleteTask(task.id) }
-                  >
-                    <Trash size={20}  />
-                  </button>
-                </div>
-              </TaskItem>
-              teste
-            </TaskList>
-
-              // <Task
-              //   key={task.id}
-              //   content={task.content}
-              //   completed={task.completed}
-              // />
+                    <button
+                      className="trash-icon"
+                      onClick={ () => handleDeleteTask(task.id) }
+                    >
+                      <Trash size={20}  />
+                    </button>
+                  </div>
+                </TaskItem>
+                <DateCreatedContainer>
+                 <p>Criado em
+                    {format(
+                    parseISO(task.createdAt),
+                    " dd 'de' MMMM', às ' HH:mm'h'",
+                    { locale: pt }
+                    )}
+                  </p>
+                </DateCreatedContainer>
+              </TaskList>
             )
 
-        )
+
+          )
         :
           <TaskListContainerEmpty>
               <img src= {pranchetaImg}  alt="icone_cadastro_vazio"/>

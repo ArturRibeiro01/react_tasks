@@ -50,6 +50,18 @@ export const TaskItem = styled.li`
   }
 
 `
+
+export const DateCreatedContainer = styled.div`
+  display: flex;
+  justify-content: end;
+  padding-right: 1.5rem;
+
+  p {
+    font-size: 10px;
+    color: ${(props) => props.theme['gray-300']};
+  }
+`
+
 export const CheckBoxRoot = styled(Checkbox.Root)`
   background-color: transparent;
   width: 20px;

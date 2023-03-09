@@ -9,7 +9,7 @@ import { useContextSelector } from 'use-context-selector';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
-import { CheckBoxIndicator, CheckBoxRoot, TaskItem, TaskList } from '../Task/styles';
+import { CheckBoxIndicator, CheckBoxRoot, TaskItem, TaskList } from './task';
 
 
 const newTaskFormSchema = z.object({

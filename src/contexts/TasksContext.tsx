@@ -67,10 +67,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
     async (data: DeleteTask) => {
       const  id  = data
 
-      const response = await api.delete(`tasks/${id}`
-        // , {}
-      )
-      setTasks((state) => [response.data, ...state])
+      await api.delete(`tasks/${id}`)
       fetchTasks()
     },
     [],

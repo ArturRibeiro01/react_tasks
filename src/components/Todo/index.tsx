@@ -45,6 +45,13 @@ export default function Todo() {
     },
   )
 
+  const totalCompleted = useContextSelector(
+    TasksContext,
+    (context) => {
+      return context.calcTaskFinished
+    },
+  )
+
   const {
     handleSubmit,
     register,
@@ -76,6 +83,8 @@ export default function Todo() {
   }
 
 
+
+
   return (
     <ToDoContainer>
       <ToDoNewTaskForm onSubmit={handleSubmit(handleCreateNewTask)}>
@@ -102,21 +111,19 @@ export default function Todo() {
           </article>
           <article>
             <StatusTask variant="completed">Concluídas</StatusTask>
-            <span>
-
-            </span>
+            <span> {totalCompleted()} de {tasks.length} </span>
           </article>
         </TasksStats>
 
 
-        {tasks.length != 0 ? (
-
+        {tasks.length != 0 ?
+          (
             tasks.map((task) =>
               <TaskList key={task.id}>
                 <TaskItem >
                   <div>
                     <CheckBoxRoot className="CheckboxRoot"  id="c1">
-                      <CheckBoxIndicator className="CheckboxIndicator">
+                      <CheckBoxIndicator>
                         <Check size={14} weight="bold" />
                       </CheckBoxIndicator>
                     </CheckBoxRoot>

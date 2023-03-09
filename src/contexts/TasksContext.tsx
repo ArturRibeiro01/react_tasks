@@ -16,6 +16,7 @@ interface TasksContextType {
   fetchTasks: () => void
   createNewTask : (data: CreateTaskInput) => Promise<void>
   deleteTask : (data: DeleteTask) => Promise<void>
+  calcTaskFinished : () => ReactNode
 }
 
 interface CreateTaskInput {
@@ -36,6 +37,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
 
   const [tasks, setTasks] = useState<Tasks[]>([])
 
+
   useEffect(() => {
     fetchTasks()
   }, [])
@@ -47,6 +49,17 @@ export function TasksProvider({ children }: TasksProviderProps) {
     })
     setTasks(response.data)
   }, [])
+
+
+  const calcTaskFinished = useCallback(() => {
+    let selectCompletedTasks = tasks.filter(task => (task.completed == true));
+    let totalcompleted = selectCompletedTasks.length
+
+    console.log('total completado',totalcompleted)
+
+    return totalcompleted
+  }, [tasks])
+
 
   const createNewTask = useCallback(
     async (data: CreateTaskInput) => {
@@ -77,7 +90,7 @@ export function TasksProvider({ children }: TasksProviderProps) {
 
   return (
     <TasksContext.Provider
-      value={{ tasks, fetchTasks, createNewTask, deleteTask}}
+      value={{ tasks, fetchTasks, createNewTask, deleteTask, calcTaskFinished}}
     >
       {children}
     </TasksContext.Provider>

@@ -1,5 +1,5 @@
-import * as Checkbox  from '@radix-ui/react-checkbox'
-import { CheckBoxIndicator, CheckBoxRoot, TaskContainer, TaskItem } from './styles'
+// import * as Checkbox  from '@radix-ui/react-checkbox'
+import { CheckBoxIndicator, CheckBoxRoot, TaskItem, TaskList } from './styles'
 import { Check, Trash } from 'phosphor-react'
 
 interface TaskContentProps {
@@ -14,7 +14,7 @@ export default function Task({content }: TaskContentProps){
 
 
   return (
-    <TaskContainer>
+    <TaskList>
       <TaskItem>
         <div>
 
@@ -37,6 +37,6 @@ export default function Task({content }: TaskContentProps){
 
         </div>
       </TaskItem>
-    </TaskContainer>
+    </TaskList>
   )
 }

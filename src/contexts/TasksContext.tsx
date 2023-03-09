@@ -15,11 +15,15 @@ interface TasksContextType {
   tasks: Tasks[]
   fetchTasks: () => void
   createNewTask : (data: CreateTaskInput) => Promise<void>
+  deleteTask : (data: DeleteTask) => Promise<void>
 }
 
 interface CreateTaskInput {
   content: string,
   completed: boolean
+}
+interface DeleteTask {
+  id: string,
 }
 
 interface TasksProviderProps {
@@ -59,14 +63,24 @@ export function TasksProvider({ children }: TasksProviderProps) {
     [],
   )
 
+  const deleteTask = useCallback(
+    async (data: DeleteTask) => {
+      const  id  = data
 
-
+      const response = await api.delete(`tasks/${id}`
+        // , {}
+      )
+      setTasks((state) => [response.data, ...state])
+      fetchTasks()
+    },
+    [],
+  )
 
 
 
   return (
     <TasksContext.Provider
-      value={{ tasks, fetchTasks, createNewTask}}
+      value={{ tasks, fetchTasks, createNewTask, deleteTask}}
     >
       {children}
     </TasksContext.Provider>

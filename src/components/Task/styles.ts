@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import * as Checkbox  from '@radix-ui/react-checkbox'
 
 
-export const TaskContainer = styled.ul`
+export const TaskList = styled.ul`
   display: flex;
   flex-direction: column;
   margin-bottom: 12px;

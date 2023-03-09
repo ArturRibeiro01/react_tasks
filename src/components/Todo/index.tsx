@@ -1,15 +1,15 @@
 
-import { PlusCircle } from 'phosphor-react';
+import { Check, PlusCircle, Trash } from 'phosphor-react';
 import { StatusTask, TaskListContainerEmpty, TaskListEmptyDescription, TasksContainer, TasksStats, ToDoContainer, ToDoNewTaskForm } from './styles';
 
 import pranchetaImg from '../../assets/clipboard.svg'
-import Task from '../Task';
 
 import { TasksContext } from '../../contexts/TasksContext';
 import { useContextSelector } from 'use-context-selector';
 import { useForm } from 'react-hook-form';
 import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
+import { CheckBoxIndicator, CheckBoxRoot, TaskItem, TaskList } from '../Task/styles';
 
 
 const newTaskFormSchema = z.object({
@@ -19,7 +19,9 @@ const newTaskFormSchema = z.object({
   }),
 })
 
+
 type NewTaskFormInput = z.infer<typeof newTaskFormSchema>
+
 
 
 
@@ -33,6 +35,13 @@ export default function Todo() {
     TasksContext,
     (context) => {
       return context.createNewTask
+    },
+  )
+
+  const deleteTask = useContextSelector(
+    TasksContext,
+    (context) => {
+      return context.deleteTask
     },
   )
 
@@ -59,6 +68,15 @@ export default function Todo() {
     })
 
     reset()
+  }
+
+  async function handleDeleteTask ( data: any){
+    const  id  = data
+    console.log('item selecionado', id)
+
+    await deleteTask(id)
+
+
   }
 
 
@@ -97,14 +115,37 @@ export default function Todo() {
 
         {tasks.length != 0 ? (
 
-            tasks.map((task) =>
-              <Task
-                key={task.id}
-                content={task.content}
-                completed={task.completed}
-              />
+          tasks.map((task) =>
+            <TaskList key={task.id}>
+              <TaskItem >
+                <div>
+                  <CheckBoxRoot className="CheckboxRoot"  id="c1">
+                    <CheckBoxIndicator className="CheckboxIndicator">
+                      <Check size={14} weight="bold" />
+                    </CheckBoxIndicator>
+                  </CheckBoxRoot>
+
+                  <p>{task.content}</p>
+
+                  <button
+                    className="trash-icon"
+                    onClick={ () => handleDeleteTask(task.id) }
+                  >
+                    <Trash size={20}  />
+                  </button>
+                </div>
+              </TaskItem>
+              teste
+            </TaskList>
+
+              // <Task
+              //   key={task.id}
+              //   content={task.content}
+              //   completed={task.completed}
+              // />
             )
-          )
+
+        )
         :
           <TaskListContainerEmpty>
               <img src= {pranchetaImg}  alt="icone_cadastro_vazio"/>

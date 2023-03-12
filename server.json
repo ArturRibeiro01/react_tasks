@@ -1,30 +1,40 @@
 {
   "tasks": [
     {
-      "id": 1,
-      "content": "Essa é uma aplicação React + TypeScript utilizando Vite",
-      "completed": false
+      "content": "Aplicação criada durante o desafio 1 do Ignite React",
+      "completed": false,
+      "createdAt": "2023-03-12T17:12:52.487Z",
+      "id": 1
     },
     {
-      "id": 2,
-      "content": "Para estilos, prototipação e design foram usados styled-components , phoshor-react , radix-UI",
-      "completed": true
+      "content": "Essa aplicação está usando as principais tecnologias. ",
+      "completed": false,
+      "createdAt": "2023-03-12T17:13:22.652Z",
+      "id": 2
     },
     {
-      "id": 3,
-      "content": "Manipulação dos dados das tasks foram usadas json-server + axios",
-      "completed": false
+      "content": "ReactJS - TypeScript - StyledComponents -ReactHookForm -Zod - JsonServer - Axios - Radix-UI - DateFNS",
+      "completed": false,
+      "createdAt": "2023-03-12T17:16:00.619Z",
+      "id": 3
     },
     {
-      "id": 4,
-      "content": "Manipulação dos dados das tasks foram usadas json-server + axios",
-      "completed": false
+      "content": "Essa aplicação executa as principais tarefas de um CRUD (Create, Read, Update , Delete ) ",
+      "completed": false,
+      "createdAt": "2023-03-12T17:16:45.069Z",
+      "id": 4
     },
     {
-      "id": 5,
-      "content": "dsadsadd dasdsadsad  dsadasdasdasd  dasdasdasda  asdsadasdsad  dsadsaddsd dsdadsad d sdasd sa dsad sad dsadas as sa sa dsadsdsadsadsa sadsdsadadsds dsdasds a sd ad dasd sa sadsadasdsad  sda dasasdas dsa dsad dsadsa dsadsadd sda as ",
-      "completed": true
+      "content": "Exemplo de aplicação concluída",
+      "completed": true,
+      "createdAt": "2023-03-12T17:17:27.001Z",
+      "id": 5
+    },
+    {
+      "content": "Novas tarefas",
+      "completed": true,
+      "createdAt": "2023-03-12T17:18:01.886Z",
+      "id": 6
     }
   ]
-
 }

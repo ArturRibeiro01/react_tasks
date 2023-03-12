@@ -63,7 +63,7 @@ export const DateCreatedContainer = styled.div`
 `
 
 export const CheckBoxRoot = styled(Checkbox.Root)`
-  all: 'unset';
+  /* all: 'unset';
   background-color: transparent;
   width: 20px;
   height: 20px;
@@ -96,9 +96,9 @@ export const CheckBoxRoot = styled(Checkbox.Root)`
       color: ${(props) => props.theme.white};
       font-weight: bold;
     }
-  }
+  } */
 
 `
 export const CheckBoxIndicator = styled(Checkbox.Indicator)`
-  background-color: transparent;
+  /* background-color: transparent; */
 `

@@ -5,7 +5,7 @@ import { StatusTask, TasksContainer, TasksStats, ToDoContainer, ToDoNewTaskForm 
 import { TasksContext } from '../../contexts/TasksContext';
 import { useContextSelector } from 'use-context-selector';
 import { useForm } from 'react-hook-form';
-import { z } from 'zod';
+import { boolean, z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckBoxIndicator, CheckBoxRoot, DateCreatedContainer, TaskItem, TaskList } from './task';
 import { format, parseISO } from 'date-fns';
@@ -25,6 +25,8 @@ const newTaskFormSchema = z.object({
 
 
 type NewTaskFormInput = z.infer<typeof newTaskFormSchema>
+
+
 
 export default function Todo() {
 
@@ -73,6 +75,7 @@ export default function Todo() {
     },
 
   })
+
   async function handleCreateNewTask(data: NewTaskFormInput) {
     const { content, completed } = data
 
@@ -88,7 +91,22 @@ export default function Todo() {
     await deleteTask(id)
   }
 
+  function handleEditTask (data: any ) {
 
+    const selectedItem = data
+    let itemclicado = tasks.find(item => item.id == selectedItem.id);
+    // console.log('itemclicado_antes', itemclicado)
+
+    itemclicado?.completed == true ? (
+      itemclicado.completed = false
+    ) : (
+      itemclicado.completed = true
+    )
+
+    console.log('itemclicado_depois', itemclicado)
+
+
+  }
 
 
 
@@ -123,7 +141,6 @@ export default function Todo() {
           </article>
         </TasksStats>
 
-
         {tasks.length != 0 ?
           (
             tasks.map((task) =>
@@ -133,7 +150,8 @@ export default function Todo() {
                     <CheckBoxRoot
                       className="CheckboxRoot"
                       id="c1"
-                      // checked={task.completed}
+                      defaultChecked={task.completed}
+                      onClick={() => handleEditTask(task)}
                     >
                       <CheckBoxIndicator  >
                         <Check size={14} weight="bold" />

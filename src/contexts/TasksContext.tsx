@@ -27,7 +27,9 @@ interface CreateTaskInput {
 
 interface UpdateTask {
   id: string,
-  completed: boolean
+  completed: boolean,
+  content: string,
+  createdAt: Date
 }
 interface DeleteTask {
   id: string,
@@ -78,16 +80,16 @@ export function TasksProvider({ children }: TasksProviderProps) {
 
   const updateItem = useCallback(
       async (data: UpdateTask) => {
-        const { id, completed } = data
+        const { id, completed, content, createdAt } = data
 
         const response = await api.put(`tasks/${id}`, {
-          // id,
+          content,
           completed,
+          createdAt,
         })
 
-        console.log('updatetask', data)
-
-        setTasks((state) => [response.data, ...state])
+        // console.log('updatetask', data)
+        fetchTasks()
       },
       [],
   )

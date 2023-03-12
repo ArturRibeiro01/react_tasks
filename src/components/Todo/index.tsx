@@ -5,7 +5,7 @@ import { StatusTask, TasksContainer, TasksStats, ToDoContainer, ToDoNewTaskForm 
 import { TasksContext } from '../../contexts/TasksContext';
 import { useContextSelector } from 'use-context-selector';
 import { useForm } from 'react-hook-form';
-import { boolean, z } from 'zod';
+import {  z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod'
 import { CheckBoxIndicator, CheckBoxRoot, DateCreatedContainer, TaskItem, TaskList } from './task';
 import { format, parseISO } from 'date-fns';
@@ -91,19 +91,27 @@ export default function Todo() {
     await deleteTask(id)
   }
 
-  function handleEditTask (data: any ) {
-
+  async function handleEditTask (data: any ) {
     const selectedItem = data
     let itemclicado = tasks.find(item => item.id == selectedItem.id);
-    // console.log('itemclicado_antes', itemclicado)
-
     itemclicado?.completed == true ? (
       itemclicado.completed = false
     ) : (
+      //@ts-ignore
       itemclicado.completed = true
     )
-
-    console.log('itemclicado_depois', itemclicado)
+    // console.log('itemclicado_depois', itemclicado)
+    await updateStatusTask({
+      //@ts-ignore
+      id: itemclicado?.id,
+      //@ts-ignore
+      content: itemclicado?.content,
+      //@ts-ignore
+      completed:itemclicado?.completed,
+      //@ts-ignore
+      createdAt:itemclicado?.createdAt,
+      // lastEditTask: new Date()
+    })
 
 
   }

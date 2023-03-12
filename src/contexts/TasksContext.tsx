@@ -65,13 +65,14 @@ export function TasksProvider({ children }: TasksProviderProps) {
     async (data: CreateTaskInput) => {
       const { content, completed } = data
 
-      const response = await api.post('tasks', {
+      // const response =
+      await api.post('tasks', {
         content,
         completed,
         createdAt: new Date(),
       })
-
-      setTasks((state) => [response.data, ...state])
+      // setTasks((state) => [response.data, ...state])
+      fetchTasks()
     },
     [],
   )

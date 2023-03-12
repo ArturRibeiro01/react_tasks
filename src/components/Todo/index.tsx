@@ -166,7 +166,11 @@ export default function Todo() {
                       </CheckBoxIndicator>
                     </CheckBoxRoot>
 
-                    <p>{task.content}</p>
+                    {task.completed == false ?
+                      <p>{task.content}</p>
+                      :
+                      <p className='completed-item'>{task.content}</p>
+                    }
 
                     <button
                       className="trash-icon"

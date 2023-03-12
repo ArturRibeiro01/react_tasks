@@ -1,58 +1,40 @@
 {
   "tasks": [
     {
-      "content": "Tarefa 1",
-      "completed": true,
-      "createdAt": "2023-03-12T16:46:52.344Z",
+      "content": "Aplicação criada durante o desafio 1 do Ignite React",
+      "completed": false,
+      "createdAt": "2023-03-12T17:12:52.487Z",
       "id": 1
     },
     {
-      "content": "9ti0r-e09t-er-9ter90-t\\",
-      "completed": true,
-      "createdAt": "2023-03-12T16:47:36.336Z",
+      "content": "Essa aplicação está usando as principais tecnologias. ",
+      "completed": false,
+      "createdAt": "2023-03-12T17:13:22.652Z",
       "id": 2
     },
     {
-      "content": "dsopadiopsaopdas[",
-      "completed": true,
-      "createdAt": "2023-03-12T16:50:29.886Z",
+      "content": "ReactJS - TypeScript - StyledComponents -ReactHookForm -Zod - JsonServer - Axios - Radix-UI - DateFNS",
+      "completed": false,
+      "createdAt": "2023-03-12T17:16:00.619Z",
       "id": 3
     },
     {
-      "content": "Tarefa 1",
-      "completed": true,
-      "createdAt": "2023-03-12T16:50:44.368Z",
+      "content": "Essa aplicação executa as principais tarefas de um CRUD (Create, Read, Update , Delete ) ",
+      "completed": false,
+      "createdAt": "2023-03-12T17:16:45.069Z",
       "id": 4
     },
     {
-      "content": "Novo teste de tarefa criada",
+      "content": "Exemplo de aplicação concluída",
       "completed": true,
-      "createdAt": "2023-03-12T17:08:29.530Z",
+      "createdAt": "2023-03-12T17:17:27.001Z",
       "id": 5
     },
     {
-      "content": "dsdasdasdsadsa",
+      "content": "Novas tarefas",
       "completed": true,
-      "createdAt": "2023-03-12T17:09:20.724Z",
+      "createdAt": "2023-03-12T17:18:01.886Z",
       "id": 6
-    },
-    {
-      "content": "Novo teste de tarefa criada",
-      "completed": true,
-      "createdAt": "2023-03-12T17:09:56.797Z",
-      "id": 7
-    },
-    {
-      "content": "Nova nova tarefa",
-      "completed": true,
-      "createdAt": "2023-03-12T17:10:37.585Z",
-      "id": 8
-    },
-    {
-      "content": "Nova tarefa de teste ",
-      "completed": true,
-      "createdAt": "2023-03-12T17:11:15.507Z",
-      "id": 9
     }
   ]
 }

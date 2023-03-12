@@ -28,7 +28,7 @@
  
 </p>
 <h1 align="center">
-    <img alt="Desafio 1 Ignite React" title="#Ignite" src="./assets/banner.png" />
+    <img alt="Desafio 1 Ignite React" title="#Ignite" src="./src/assets/banner.png" />
 </h1>
 
 <h4 align="center"> 

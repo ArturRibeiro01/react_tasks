@@ -1,8 +1,6 @@
 
-import { Check, PlusCircle, Trash } from 'phosphor-react';
+
 import { StatusTask, TasksContainer, TasksStats, ToDoContainer, ToDoNewTaskForm } from './styles';
-
-
 
 import { TasksContext } from '../../contexts/TasksContext';
 import { useContextSelector } from 'use-context-selector';
@@ -13,6 +11,9 @@ import { CheckBoxIndicator, CheckBoxRoot, DateCreatedContainer, TaskItem, TaskLi
 import { format, parseISO } from 'date-fns';
 import pt from 'date-fns/locale/pt';
 import TaskEmpty from '../TaskEmpty';
+
+import { Check, PlusCircle, Trash } from 'phosphor-react';
+import { useState } from 'react';
 
 
 const newTaskFormSchema = z.object({
@@ -59,6 +60,7 @@ export default function Todo() {
     },
   )
 
+
   const {
     handleSubmit,
     register,
@@ -71,8 +73,6 @@ export default function Todo() {
     },
 
   })
-
-
   async function handleCreateNewTask(data: NewTaskFormInput) {
     const { content, completed } = data
 
@@ -83,24 +83,13 @@ export default function Todo() {
     reset()
   }
 
-  async function handleUpdateTask(data: any) {
-
-    const { id } = data
-    console.log
-    // console.log('completed', completed)
-
-    // await updateStatusTask({
-    //   completed,
-    //   id
-    // })
-
-  }
-
-
   async function handleDeleteTask ( data: any){
     const  id  = data
     await deleteTask(id)
   }
+
+
+
 
 
   return (
@@ -144,6 +133,7 @@ export default function Todo() {
                     <CheckBoxRoot
                       className="CheckboxRoot"
                       id="c1"
+                      // checked={task.completed}
                     >
                       <CheckBoxIndicator  >
                         <Check size={14} weight="bold" />
@@ -171,8 +161,6 @@ export default function Todo() {
                 </DateCreatedContainer>
               </TaskList>
             )
-
-
           )
         :
         <TaskEmpty/>

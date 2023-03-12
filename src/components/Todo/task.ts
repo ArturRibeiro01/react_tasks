@@ -63,6 +63,7 @@ export const DateCreatedContainer = styled.div`
 `
 
 export const CheckBoxRoot = styled(Checkbox.Root)`
+  all: 'unset';
   background-color: transparent;
   width: 20px;
   height: 20px;
